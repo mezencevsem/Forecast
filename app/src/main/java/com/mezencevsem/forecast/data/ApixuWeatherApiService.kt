@@ -1,7 +1,7 @@
 package com.mezencevsem.forecast.data
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mezencevsem.forecast.data.response.CurrentWeatherResponse
+import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -21,6 +21,7 @@ interface ApixuWeatherApiService {
     @GET("current")
     fun getCurrentWeather(
         @Query("query") location: String
+        // language (en) and unit system (m) locked (free plan)
     ): Deferred<CurrentWeatherResponse>
 
     companion object {

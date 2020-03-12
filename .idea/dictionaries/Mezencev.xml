@@ -6,6 +6,7 @@
       <w>gson</w>
       <w>kodein</w>
       <w>mezencevsem</w>
+      <w>upsert</w>
     </words>
   </dictionary>
 </component>

@@ -1,4 +1,4 @@
-package com.mezencevsem.forecast.data.response
+package com.mezencevsem.forecast.data.database.entity
 
 
 import com.google.gson.annotations.SerializedName
