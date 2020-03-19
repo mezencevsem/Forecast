@@ -11,17 +11,20 @@ import com.mezencevsem.forecast.R
 import com.mezencevsem.forecast.data.network.ApixuWeatherApiService
 import com.mezencevsem.forecast.data.network.ConnectivityInterceptorImpl
 import com.mezencevsem.forecast.data.network.WeatherNetworkDataSourceImpl
+import com.mezencevsem.forecast.views.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
+    override val kodein by closestKodein()
 
-    companion object {
-        fun newInstance() =
-            CurrentWeatherFragment()
-    }
+    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
 
     private lateinit var viewModel: CurrentWeatherViewModel
 
@@ -34,21 +37,20 @@ class CurrentWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
 
-        val apiService =
-            ApixuWeatherApiService(ConnectivityInterceptorImpl(this.context!!))
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(CurrentWeatherViewModel::class.java)
 
-        val weatherNetworkDataSource = WeatherNetworkDataSourceImpl(apiService)
-
-        weatherNetworkDataSource.downloadedCurrentWeather.observe(viewLifecycleOwner, Observer {
-            tv.text = it.currentWeatherEntry.toString()
-        })
-
-        GlobalScope.launch(Dispatchers.Main) {
-            weatherNetworkDataSource.fetchCurrentWeather("Saint-Petersburg")
-        }
+        bindUI()
     }
 
+    private fun bindUI() = launch {
+        val currentWeather = viewModel.weather.await()
+
+        currentWeather.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+
+            tv.text = it.toString()
+        })
+    }
 }

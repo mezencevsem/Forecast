@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/currentWeatherFragment"
         android:name="com.mezencevsem.forecast.views.weather.current.CurrentWeatherFragment"
-        android:label="current_weather_fragment"
+        android:label="Current weather"
         tools:layout="@layout/current_weather_fragment" />
     <fragment
         android:id="@+id/futureListWeatherFragment"
         android:name="com.mezencevsem.forecast.views.weather.future.list.FutureListWeatherFragment"
-        android:label="future_list_weather_fragment"
+        android:label="Future weather"
         tools:layout="@layout/future_list_weather_fragment" />
     <fragment
         android:id="@+id/futureDetailWeatherFragment"
@@ -23,5 +23,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.mezencevsem.forecast.views.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" />
 </navigation>
