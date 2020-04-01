@@ -1,5 +1,6 @@
 package com.mezencevsem.forecast.views.weather.current
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -57,14 +58,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             updateDateToToday()
 
             updateTemperatures(it.temperature, it.feelslike)
-            //TODO fix condition
-            updateCondition("Clear")
+            updateCondition(it.weatherDescriptions.first())
             updatePrecipitation(it.precip)
             updateWind(it.windDir, it.windSpeed)
             updateVisibility(it.visibility)
-            //TODO fix icon
             GlideApp.with(this@CurrentWeatherFragment)
-                .load("https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png")
+                .load(it.weatherIcons.first())
                 .into(imageView_condition_icon)
         })
     }

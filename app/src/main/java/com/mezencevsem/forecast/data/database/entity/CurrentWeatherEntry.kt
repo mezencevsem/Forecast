@@ -3,7 +3,9 @@ package com.mezencevsem.forecast.data.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import com.mezencevsem.forecast.data.database.converters.ListDataConverter
 
 const val CURRENT_WEATHER_ID = 0
 
@@ -24,10 +26,12 @@ data class CurrentWeatherEntry(
     val visibility: Double,
     @SerializedName("weather_code")
     val weatherCode: Int,
-    //@SerializedName("weather_descriptions")
-    //val weatherDescriptions: List<String>,
-    //@SerializedName("weather_icons")
-    //val weatherIcons: List<String>,
+    @SerializedName("weather_descriptions")
+    @TypeConverters(ListDataConverter::class)
+    val weatherDescriptions: List<String>,
+    @SerializedName("weather_icons")
+    @TypeConverters(ListDataConverter::class)
+    val weatherIcons: List<String>,
     @SerializedName("wind_degree")
     val windDegree: Int,
     @SerializedName("wind_dir")

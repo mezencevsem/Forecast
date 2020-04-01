@@ -26,12 +26,6 @@ interface ApixuWeatherApiService {
         // language (en) and unit system (m) locked (free plan)
     ): Deferred<CurrentWeatherResponse>
 
-/*
-    @GET("test")
-    fun getTest(@Query("asdf") test: String
-               ,@Query("asd") test2: String) : Observable<Response<CurrentWeatherResponse>>
-*/
-
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
