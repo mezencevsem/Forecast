@@ -5,16 +5,21 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
 import com.mezencevsem.forecast.data.database.converters.ListDataConverter
+import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
+import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 
 @Database(
-    entities = [CurrentWeatherEntry::class],
+    entities = [
+        CurrentWeatherEntry::class,
+        WeatherLocation::class
+    ],
     version = 1
-    )
+)
 @TypeConverters(ListDataConverter::class)
 abstract class ForecastDatabase : RoomDatabase() {
-    abstract fun currentWeatherDAO() : CurrentWeatherDAO
+    abstract fun currentWeatherDAO(): CurrentWeatherDAO
+    abstract fun weatherLocationDAO(): WeatherLocationDAO
 
     companion object {
         @Volatile
@@ -27,9 +32,9 @@ abstract class ForecastDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
-                    context.applicationContext,
-                    ForecastDatabase::class.java,
-                    "forecast.db")
-                .build()
+                context.applicationContext,
+                ForecastDatabase::class.java,
+                "forecast.db"
+            ).build()
     }
 }
