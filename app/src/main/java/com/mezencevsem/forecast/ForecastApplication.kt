@@ -1,9 +1,12 @@
 package com.mezencevsem.forecast
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mezencevsem.forecast.data.database.ForecastDatabase
 import com.mezencevsem.forecast.data.network.*
+import com.mezencevsem.forecast.data.provider.UnitProvider
+import com.mezencevsem.forecast.data.provider.UnitProviderImpl
 import com.mezencevsem.forecast.data.repository.ForecastRepository
 import com.mezencevsem.forecast.data.repository.ForecastRepositoryImpl
 import com.mezencevsem.forecast.views.weather.current.CurrentWeatherViewModelFactory
@@ -31,11 +34,14 @@ class ForecastApplication : Application(), KodeinAware {
 
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
 
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }
