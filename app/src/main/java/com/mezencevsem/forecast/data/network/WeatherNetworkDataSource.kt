@@ -6,5 +6,9 @@ import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
 interface WeatherNetworkDataSource {
     val downloadedCurrentWeather: LiveData<CurrentWeatherResponse>
 
-    suspend fun fetchCurrentWeather(location: String)
+    suspend fun fetchCurrentWeather(
+        location: String,
+        unitSystemCode: String,
+        languageCode: String
+    )
 }

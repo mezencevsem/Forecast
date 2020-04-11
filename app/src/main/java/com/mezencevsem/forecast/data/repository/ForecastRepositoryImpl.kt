@@ -7,7 +7,9 @@ import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 import com.mezencevsem.forecast.data.network.WeatherNetworkDataSource
 import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
+import com.mezencevsem.forecast.data.provider.LanguageProvider
 import com.mezencevsem.forecast.data.provider.LocationProvider
+import com.mezencevsem.forecast.data.provider.UnitProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,7 +20,9 @@ class ForecastRepositoryImpl(
     private val currentWeatherDAO: CurrentWeatherDAO,
     private val weatherLocationDAO: WeatherLocationDAO,
     private val weatherNetworkDataSource: WeatherNetworkDataSource,
-    private val locationProvider: LocationProvider
+    private val locationProvider: LocationProvider,
+    private val unitProvider: UnitProvider,
+    private val languageProvider: LanguageProvider
 ) : ForecastRepository {
 
     init {
@@ -61,7 +65,11 @@ class ForecastRepositoryImpl(
     }
 
     private suspend fun fetchCurrentWeather() {
-        weatherNetworkDataSource.fetchCurrentWeather(locationProvider.getPreferredLocationString())
+        weatherNetworkDataSource.fetchCurrentWeather(
+            locationProvider.getPreferredLocationString(),
+            unitProvider.getUnitSystemCode(),
+            languageProvider.getLanguageCode()
+        )
     }
 
     private fun isFetchCurrentNeeded(lastFetchedTime: ZonedDateTime): Boolean {

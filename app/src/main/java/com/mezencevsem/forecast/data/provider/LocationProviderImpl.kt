@@ -52,7 +52,7 @@ class LocationProviderImpl(
             ?: return false
 
         val comparisonThreshold = 0.03
-        //TODO && or ||
+
         return abs(deviceLocation.latitude - lastWeatherLocation.lat.toDouble()) > comparisonThreshold ||
                 abs(deviceLocation.longitude - lastWeatherLocation.lat.toDouble()) > comparisonThreshold
     }

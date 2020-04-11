@@ -14,7 +14,7 @@ import retrofit2.http.Query
 
 const val BASE_URL = "http://api.weatherstack.com/"
 
-const val API_KEY = "ed1c32f4e3e368ffc9c43590c65dd911"
+const val API_KEY = "a07f82e48da47c39f68050ea167ef90b"
 
 //ex. http://api.weatherstack.com/current?access_key=ed1c32f4e3e368ffc9c43590c65dd911&query=Saint-Petersburg
 
@@ -22,8 +22,9 @@ interface ApixuWeatherApiService {
 
     @GET("current")
     fun getCurrentWeather(
-        @Query("query") location: String
-        // language (en) and unit system (m) locked (free plan)
+        @Query("query") location: String,
+        @Query("units") unitSystem: String,
+        @Query("language") language: String
     ): Deferred<CurrentWeatherResponse>
 
     companion object {

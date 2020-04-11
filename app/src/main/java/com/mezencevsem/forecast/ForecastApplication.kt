@@ -7,10 +7,7 @@ import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mezencevsem.forecast.data.database.ForecastDatabase
 import com.mezencevsem.forecast.data.network.*
-import com.mezencevsem.forecast.data.provider.LocationProvider
-import com.mezencevsem.forecast.data.provider.LocationProviderImpl
-import com.mezencevsem.forecast.data.provider.UnitProvider
-import com.mezencevsem.forecast.data.provider.UnitProviderImpl
+import com.mezencevsem.forecast.data.provider.*
 import com.mezencevsem.forecast.data.repository.ForecastRepository
 import com.mezencevsem.forecast.data.repository.ForecastRepositoryImpl
 import com.mezencevsem.forecast.views.weather.current.CurrentWeatherViewModelFactory
@@ -34,8 +31,9 @@ class ForecastApplication : Application(), KodeinAware {
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
         bind<LocationProvider>() with singleton { LocationProviderImpl(instance(), instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind<LanguageProvider>() with singleton { LanguageProviderImpl(instance()) }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance(), instance(), instance()) }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 

@@ -14,10 +14,17 @@ class WeatherNetworkDataSourceImpl(
     override val downloadedCurrentWeather: LiveData<CurrentWeatherResponse>
         get() = _downloadedCurrentWeather
 
-    override suspend fun fetchCurrentWeather(location: String) {
+    override suspend fun fetchCurrentWeather(
+        location: String,
+        unitSystemCode: String,
+        languageCode: String
+    ) {
         try {
             val fetchCurrentWeather = apixuWeatherApiService
-                .getCurrentWeather(location)
+                .getCurrentWeather(
+                    location,
+                    unitSystemCode,
+                    languageCode.replace("en", ""))
                 .await()
 
             _downloadedCurrentWeather.postValue(fetchCurrentWeather)

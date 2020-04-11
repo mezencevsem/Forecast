@@ -26,6 +26,7 @@ data class CurrentWeatherEntry(
     val visibility: Double,
     @SerializedName("weather_code")
     val weatherCode: Int,
+    //TODO
     @SerializedName("weather_descriptions")
     @TypeConverters(ListDataConverter::class)
     val weatherDescriptions: List<String>,
