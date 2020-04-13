@@ -19,12 +19,14 @@ class WeatherNetworkDataSourceImpl(
         unitSystemCode: String,
         languageCode: String
     ) {
+        val languageCodeAdapted = languageCode.replace("en", "")
         try {
             val fetchCurrentWeather = apixuWeatherApiService
                 .getCurrentWeather(
                     location,
                     unitSystemCode,
-                    languageCode.replace("en", ""))
+                    languageCodeAdapted
+                )
                 .await()
 
             _downloadedCurrentWeather.postValue(fetchCurrentWeather)

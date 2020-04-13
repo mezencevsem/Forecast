@@ -2,8 +2,10 @@ package com.mezencevsem.forecast.data.repository
 
 import androidx.lifecycle.LiveData
 import com.mezencevsem.forecast.data.database.CurrentWeatherDAO
+import com.mezencevsem.forecast.data.database.RequestDAO
 import com.mezencevsem.forecast.data.database.WeatherLocationDAO
 import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
+import com.mezencevsem.forecast.data.database.entity.Request
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 import com.mezencevsem.forecast.data.network.WeatherNetworkDataSource
 import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
@@ -19,6 +21,7 @@ import org.threeten.bp.ZonedDateTime
 class ForecastRepositoryImpl(
     private val currentWeatherDAO: CurrentWeatherDAO,
     private val weatherLocationDAO: WeatherLocationDAO,
+    private val requestDAO: RequestDAO,
     private val weatherNetworkDataSource: WeatherNetworkDataSource,
     private val locationProvider: LocationProvider,
     private val unitProvider: UnitProvider,
@@ -39,7 +42,7 @@ class ForecastRepositoryImpl(
     }
 
     override suspend fun getWeatherLocation(): LiveData<WeatherLocation> {
-        return withContext(Dispatchers.IO){
+        return withContext(Dispatchers.IO) {
             return@withContext weatherLocationDAO.getLocation()
         }
     }
@@ -48,19 +51,22 @@ class ForecastRepositoryImpl(
         GlobalScope.launch(Dispatchers.IO) {
             currentWeatherDAO.upsert(fetchedWeather.currentWeatherEntry)
             weatherLocationDAO.upsert(fetchedWeather.location)
+            requestDAO.upsert(fetchedWeather.request)
         }
     }
 
     private suspend fun initWeatherData() {
         val lastWeatherLocation = weatherLocationDAO.getLocation().value
+        val lastRequestInfo = requestDAO.getRequestInfo().value
 
         if (lastWeatherLocation == null
-            || locationProvider.hasLocationChanged(lastWeatherLocation)) {
+            || locationProvider.hasLocationChanged(lastWeatherLocation)
+        ) {
             fetchCurrentWeather()
             return
         }
 
-        if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime))
+        if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime, lastRequestInfo!!))
             fetchCurrentWeather()
     }
 
@@ -72,7 +78,13 @@ class ForecastRepositoryImpl(
         )
     }
 
-    private fun isFetchCurrentNeeded(lastFetchedTime: ZonedDateTime): Boolean {
+    private fun isFetchCurrentNeeded(
+        lastFetchedTime: ZonedDateTime,
+        lastRequestInfo: Request
+    ): Boolean {
+        if (lastRequestInfo.languageCode != languageProvider.getLanguageCode()) return true
+        if (lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()) return true
+
         val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
         return lastFetchedTime.isBefore(thirtyMinutesAgo)
     }

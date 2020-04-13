@@ -16,5 +16,5 @@ class UnitProviderImpl(context: Context) : PreferenceProvider(context), UnitProv
 
     override fun getUnitSystemCode(): String = if (getUnitSystem() == UnitSystem.METRIC)
         UNIT_SYSTEM_METRIC_CODE
-        else UNIT_SYSTEM_IMPERIAL_CODE
+    else UNIT_SYSTEM_IMPERIAL_CODE
 }

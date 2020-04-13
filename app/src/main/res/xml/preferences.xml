@@ -10,27 +10,27 @@
 
         <EditTextPreference
             android:defaultValue="Moscow"
+            android:dependency="USE_DEVICE_LOCATION"
             android:key="CUSTOM_LOCATION"
             android:summary="The location for witch the weather is displayed"
-            android:title="Location"
-            android:dependency="USE_DEVICE_LOCATION"/>
+            android:title="Location" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Localization">
         <ListPreference
-            android:title="Language"
-            android:key="LANGUAGE"
-            android:summary="%s"
             android:defaultValue="ENGLISH"
             android:entries="@array/languageEntries"
-            android:entryValues="@array/languageValues" />
+            android:entryValues="@array/languageValues"
+            android:key="LANGUAGE"
+            android:summary="%s"
+            android:title="Language" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Units">
         <ListPreference
-            android:title="Unit system"
-            android:key="UNIT_SYSTEM"
-            android:summary="%s"
             android:defaultValue="METRIC"
             android:entries="@array/unitSystemEntries"
-            android:entryValues="@array/unitSystemValues"/>
+            android:entryValues="@array/unitSystemValues"
+            android:key="UNIT_SYSTEM"
+            android:summary="%s"
+            android:title="Unit system" />
     </PreferenceCategory>
 </PreferenceScreen>

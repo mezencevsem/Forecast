@@ -1,25 +1,18 @@
 package com.mezencevsem.forecast.views.weather.current
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.mezencevsem.forecast.R
-import com.mezencevsem.forecast.data.network.ApixuWeatherApiService
-import com.mezencevsem.forecast.data.network.ConnectivityInterceptorImpl
-import com.mezencevsem.forecast.data.network.WeatherNetworkDataSourceImpl
+import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
 import com.mezencevsem.forecast.internal.glide.GlideApp
 import com.mezencevsem.forecast.views.base.ScopedFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -49,29 +42,35 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch {
         val currentWeather = viewModel.weather.await()
-
         val weatherLocation = viewModel.location.await()
 
-        weatherLocation.observe(viewLifecycleOwner, Observer {location ->
+        weatherLocation.observe(viewLifecycleOwner, Observer { location ->
             if (location == null) return@Observer
             updateLocation(location.name)
         })
 
         currentWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
+            if (!viewModel.isEnglish && it.weatherDescriptionsRu == null) return@Observer
 
             group_loading.visibility = View.GONE
             updateDateToToday()
 
+            updateCondition(getLocalizedCondition(it))
             updateTemperatures(it.temperature, it.feelslike)
-            updateCondition(it.weatherDescriptions.first())
             updatePrecipitation(it.precip)
             updateWind(it.windDir, it.windSpeed)
             updateVisibility(it.visibility)
+
             GlideApp.with(this@CurrentWeatherFragment)
                 .load(it.weatherIcons.first())
                 .into(imageView_condition_icon)
         })
+    }
+
+    private fun getLocalizedCondition(weather: CurrentWeatherEntry): String {
+        return if (viewModel.isEnglish) weather.weatherDescriptions.first()
+        else weather.weatherDescriptionsRu!!.first()
     }
 
     private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {

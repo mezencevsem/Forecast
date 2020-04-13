@@ -34,13 +34,11 @@ class LocationProviderImpl(
             try {
                 val deviceLocation = getLastDeviceLocation().await()
                     ?: return "${getCustomLocationName()}"
-                Log.i("Location", "Location is: ${deviceLocation.latitude},${deviceLocation.longitude}")
                 return "${deviceLocation.latitude},${deviceLocation.longitude}"
             } catch (e: LocationPermissionNotGrantedException) {
                 return "${getCustomLocationName()}"
             }
-        }
-        else
+        } else
             return "${getCustomLocationName()}"
     }
 
@@ -78,7 +76,9 @@ class LocationProviderImpl(
     }
 
     private fun hasLocationPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(appContext,
-            Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(
+            appContext,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }

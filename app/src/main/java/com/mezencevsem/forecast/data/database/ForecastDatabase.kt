@@ -7,12 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mezencevsem.forecast.data.database.converters.ListDataConverter
 import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
+import com.mezencevsem.forecast.data.database.entity.Request
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 
 @Database(
     entities = [
         CurrentWeatherEntry::class,
-        WeatherLocation::class
+        WeatherLocation::class,
+        Request::class
     ],
     version = 1
 )
@@ -20,6 +22,7 @@ import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDAO(): CurrentWeatherDAO
     abstract fun weatherLocationDAO(): WeatherLocationDAO
+    abstract fun requestDAO(): RequestDAO
 
     companion object {
         @Volatile
