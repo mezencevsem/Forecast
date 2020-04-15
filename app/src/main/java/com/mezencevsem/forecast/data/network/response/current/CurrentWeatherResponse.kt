@@ -1,4 +1,4 @@
-package com.mezencevsem.forecast.data.network.response
+package com.mezencevsem.forecast.data.network.response.current
 
 import com.google.gson.annotations.SerializedName
 import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry

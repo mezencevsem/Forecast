@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mezencevsem.forecast.data.database.converters.ListDataConverter
+import com.mezencevsem.forecast.data.database.converters.LocalDateConverter
 import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
 import com.mezencevsem.forecast.data.database.entity.Request
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
@@ -18,9 +19,13 @@ import com.mezencevsem.forecast.data.database.entity.WeatherLocation
     ],
     version = 1
 )
-@TypeConverters(ListDataConverter::class)
+@TypeConverters(
+    ListDataConverter::class,
+    LocalDateConverter::class
+)
 abstract class ForecastDatabase : RoomDatabase() {
     abstract fun currentWeatherDAO(): CurrentWeatherDAO
+    abstract fun futureWeatherDAO(): FutureWeatherDAO
     abstract fun weatherLocationDAO(): WeatherLocationDAO
     abstract fun requestDAO(): RequestDAO
 

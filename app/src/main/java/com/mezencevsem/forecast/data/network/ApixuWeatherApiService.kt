@@ -1,7 +1,8 @@
 package com.mezencevsem.forecast.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
+import com.mezencevsem.forecast.data.network.response.current.CurrentWeatherResponse
+import com.mezencevsem.forecast.data.network.response.future.FutureWeatherResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,10 +18,18 @@ interface ApixuWeatherApiService {
 
     @GET("current")
     fun getCurrentWeather(
-        @Query("query") location: String,   // &query=Saint-Petersburg
-        @Query("units") unitSystem: String, // &units=m
-        @Query("language") language: String // &language=ru
+        @Query("query") location: String,
+        @Query("units") unitSystem: String,
+        @Query("language") language: String
     ): Deferred<CurrentWeatherResponse>
+
+    @GET("forecast")
+    fun getFutureWeather(
+        @Query("query") location: String,
+        @Query("forecast_days") days: Int,
+        @Query("units") unitSystem: String,
+        @Query("language") language: String
+    ): Deferred<FutureWeatherResponse>
 
     companion object {
         operator fun invoke(

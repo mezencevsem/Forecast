@@ -1,6 +1,5 @@
 package com.mezencevsem.forecast.data.database.entity
 
-
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters

@@ -8,7 +8,7 @@ import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
 import com.mezencevsem.forecast.data.database.entity.Request
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 import com.mezencevsem.forecast.data.network.WeatherNetworkDataSource
-import com.mezencevsem.forecast.data.network.response.CurrentWeatherResponse
+import com.mezencevsem.forecast.data.network.response.current.CurrentWeatherResponse
 import com.mezencevsem.forecast.data.provider.LanguageProvider
 import com.mezencevsem.forecast.data.provider.LocationProvider
 import com.mezencevsem.forecast.data.provider.UnitProvider
