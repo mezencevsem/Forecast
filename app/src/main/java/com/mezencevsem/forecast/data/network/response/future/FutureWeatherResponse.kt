@@ -7,7 +7,7 @@ import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 data class FutureWeatherResponse(
     //val current: Current,
     //val request: Request,
+    val location: WeatherLocation,
     @SerializedName("forecast")
-    val futureWeatherEntries: List<FutureWeatherEntry>,
-    val location: WeatherLocation
+    val futureWeatherEntries: List<FutureWeatherEntry>
 )

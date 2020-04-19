@@ -11,6 +11,7 @@ import com.mezencevsem.forecast.data.provider.*
 import com.mezencevsem.forecast.data.repository.ForecastRepository
 import com.mezencevsem.forecast.data.repository.ForecastRepositoryImpl
 import com.mezencevsem.forecast.views.weather.current.CurrentWeatherViewModelFactory
+import com.mezencevsem.forecast.views.weather.future.list.FutureListWeatherViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -25,6 +26,7 @@ class ForecastApplication : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDAO() }
+        bind() from singleton { instance<ForecastDatabase>().futureWeatherDAO() }
         bind() from singleton { instance<ForecastDatabase>().weatherLocationDAO() }
         bind() from singleton { instance<ForecastDatabase>().requestDAO() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
@@ -42,10 +44,12 @@ class ForecastApplication : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance(), instance()) }
+        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance(), instance()) }
     }
 
     override fun onCreate() {

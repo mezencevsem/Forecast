@@ -20,7 +20,7 @@ import org.kodein.di.generic.instance
 class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     override val kodein by closestKodein()
 
-    private val viewModelFactory: CurrentWeatherViewModelFactory by instance()
+    private val viewModelFactory: CurrentWeatherViewModelFactory by instance<CurrentWeatherViewModelFactory>()
 
     private lateinit var viewModel: CurrentWeatherViewModel
 
@@ -51,7 +51,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
         currentWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            if (!viewModel.isEnglish && it.weatherDescriptionsRu == null) return@Observer
+            if (!viewModel.isEnglishLanguage && it.weatherDescriptionsRu == null) return@Observer
 
             group_loading.visibility = View.GONE
             updateDateToToday()
@@ -69,12 +69,12 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun getLocalizedCondition(weather: CurrentWeatherEntry): String {
-        return if (viewModel.isEnglish) weather.weatherDescriptions.first()
+        return if (viewModel.isEnglishLanguage) weather.weatherDescriptions.first()
         else weather.weatherDescriptionsRu!!.first()
     }
 
     private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
-        return if (viewModel.isMetric) metric else imperial
+        return if (viewModel.isMetricUnit) metric else imperial
     }
 
     private fun updateLocation(location: String) {

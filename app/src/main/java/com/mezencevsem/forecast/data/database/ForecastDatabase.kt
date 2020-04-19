@@ -8,12 +8,14 @@ import androidx.room.TypeConverters
 import com.mezencevsem.forecast.data.database.converters.ListDataConverter
 import com.mezencevsem.forecast.data.database.converters.LocalDateConverter
 import com.mezencevsem.forecast.data.database.entity.CurrentWeatherEntry
+import com.mezencevsem.forecast.data.database.entity.FutureWeatherEntry
 import com.mezencevsem.forecast.data.database.entity.Request
 import com.mezencevsem.forecast.data.database.entity.WeatherLocation
 
 @Database(
     entities = [
         CurrentWeatherEntry::class,
+        FutureWeatherEntry::class,
         WeatherLocation::class,
         Request::class
     ],
