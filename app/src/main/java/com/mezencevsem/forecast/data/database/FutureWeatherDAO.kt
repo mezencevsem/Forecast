@@ -11,7 +11,7 @@ import org.threeten.bp.LocalDate
 @Dao
 interface FutureWeatherDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(futureWeatherEntries: List<FutureWeatherEntry>)
+    fun insert(futureWeatherEntries: FutureWeatherEntry)
 
     @Query("select * from future_weather where date(date) >= date(:startDate)")
     fun getForecastWeather(startDate: LocalDate): LiveData<List<FutureWeatherEntry>>

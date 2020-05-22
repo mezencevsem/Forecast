@@ -9,5 +9,5 @@ data class FutureWeatherResponse(
     //val request: Request,
     val location: WeatherLocation,
     @SerializedName("forecast")
-    val futureWeatherEntries: List<FutureWeatherEntry>
+    val futureWeatherEntries: FutureWeatherContainer
 )

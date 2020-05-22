@@ -5,13 +5,13 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
 object LocalDateConverter {
-    @TypeConverter
     @JvmStatic
+    @TypeConverter
     fun stringToDate(string: String?) = string?.let {
         LocalDate.parse(it, DateTimeFormatter.ISO_LOCAL_DATE)
     }
 
-    @TypeConverter
     @JvmStatic
+    @TypeConverter
     fun dateToString(dateTime: LocalDate?) = dateTime?.format(DateTimeFormatter.ISO_LOCAL_DATE)
 }

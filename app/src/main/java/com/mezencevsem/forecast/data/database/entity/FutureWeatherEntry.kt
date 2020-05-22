@@ -15,8 +15,9 @@ data class FutureWeatherEntry(
     val id: Int? = null,
     //val astro: Astro,
     val avgtemp: Int,
-    @TypeConverters(LocalDateConverter::class)
-    val date: LocalDate,
+    /*@TypeConverters(LocalDateConverter::class)
+    val date: LocalDate,*/
+    val date: String,
     /*@SerializedName("date_epoch")
     val dateEpoch: Int,*/
     val maxtemp: Int,

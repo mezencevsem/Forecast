@@ -83,7 +83,16 @@ class ForecastRepositoryImpl(
         GlobalScope.launch(Dispatchers.IO) {
             deleteOldForecastData()
             val futureWeatherList = fetchedWeather.futureWeatherEntries
-            futureWeatherDAO.insert(futureWeatherList)
+            futureWeatherDAO.insert(futureWeatherList.day1)
+            futureWeatherDAO.insert(futureWeatherList.day2)
+            futureWeatherDAO.insert(futureWeatherList.day3)
+            futureWeatherDAO.insert(futureWeatherList.day4)
+            futureWeatherDAO.insert(futureWeatherList.day5)
+            futureWeatherDAO.insert(futureWeatherList.day6)
+            futureWeatherDAO.insert(futureWeatherList.day7)
+            futureWeatherDAO.insert(futureWeatherList.day8)
+            futureWeatherDAO.insert(futureWeatherList.day9)
+            futureWeatherDAO.insert(futureWeatherList.day10)
             weatherLocationDAO.upsert(fetchedWeather.location)
         }
     }
@@ -100,10 +109,10 @@ class ForecastRepositoryImpl(
             return
         }
 
-        if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime, lastRequestInfo!!))
+        if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime, lastRequestInfo))
             fetchCurrentWeather()
 
-        if (isFetchFutureNeeded())
+        if (isFetchFutureNeeded(lastRequestInfo))
             fetchFutureWeather()
     }
 
@@ -125,16 +134,21 @@ class ForecastRepositoryImpl(
 
     private fun isFetchCurrentNeeded(
         lastFetchedTime: ZonedDateTime,
-        lastRequestInfo: Request
+        lastRequestInfo: Request?
     ): Boolean {
-        if (lastRequestInfo.languageCode != languageProvider.getLanguageCode()) return true
-        if (lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()) return true
+        if (lastRequestInfo == null) return true
+
+        if (lastRequestInfo.languageCode != languageProvider.getLanguageCode() ||
+            lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()) return true
 
         val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
         return lastFetchedTime.isBefore(thirtyMinutesAgo)
     }
 
-    private fun isFetchFutureNeeded(): Boolean {
+    private fun isFetchFutureNeeded(lastRequestInfo: Request?): Boolean {
+        if (lastRequestInfo == null) return true
+        if (lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()) return true
+
         val today = LocalDate.now()
         val futureWeatherCount = futureWeatherDAO.countFutureWeather(today)
         return futureWeatherCount < FORECAST_DAYS_COUNT

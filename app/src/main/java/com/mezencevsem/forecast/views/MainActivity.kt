@@ -28,7 +28,7 @@ private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 class MainActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by closestKodein()
-    private val fusedLocationProviderClient: FusedLocationProviderClient by instance()
+    private val fusedLocationProviderClient: FusedLocationProviderClient by instance<FusedLocationProviderClient>()
 
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(p0: LocationResult?) {
@@ -91,7 +91,6 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 bindLocationManager()
             else
-                //TODO replace on Snackbar
                 Toast.makeText(this, "Please, set location manually in settings", Toast.LENGTH_LONG).show()
         }
     }
