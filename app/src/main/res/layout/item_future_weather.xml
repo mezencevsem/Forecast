@@ -24,7 +24,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="10.12.2020" />
+            tools:text="Jun 10, 2020" />
 
         <TextView
             android:id="@+id/textView_temperature"
@@ -42,15 +42,15 @@
             android:id="@+id/textView_temperature_range"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="4dp"
-            android:paddingEnd="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="0dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_temperature"
-            tools:text="8.0°C - 17.0°C" />
+            tools:text="8.0°C .. 17.0°C" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

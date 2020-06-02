@@ -16,12 +16,8 @@
         android:label="Future weather"
         tools:layout="@layout/future_list_weather_fragment" />
     <fragment
-        android:id="@+id/futureDetailWeatherFragment"
-        android:name="com.mezencevsem.forecast.views.weather.future.detail.FutureDetailWeatherFragment"
-        android:label="future_detail_weather_fragment"
-        tools:layout="@layout/future_detail_weather_fragment" />
-    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.mezencevsem.forecast.views.settings.SettingsFragment"
         android:label="Settings" />
+
 </navigation>

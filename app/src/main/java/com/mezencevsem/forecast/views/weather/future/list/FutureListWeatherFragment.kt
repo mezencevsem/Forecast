@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,11 +16,9 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.future_list_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 
 class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
 
@@ -87,8 +84,8 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
             adapter = groupAdapter
         }
         
-        groupAdapter.setOnItemClickListener { item, view ->
+        /*groupAdapter.setOnItemClickListener { item, view ->
             Toast.makeText(this.context, "detail", Toast.LENGTH_SHORT).show()
-        }
+        }*/
     }
 }

@@ -49,7 +49,13 @@ class ForecastApplication : Application(), KodeinAware {
             )
         }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance(), instance()) }
-        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance(), instance()) }
+        bind() from provider {
+            FutureListWeatherViewModelFactory(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
     }
 
     override fun onCreate() {

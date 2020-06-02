@@ -26,16 +26,15 @@ data class FutureWeatherContainer(
     val day10: FutureWeatherEntry
 ) {
     companion object {
-
-        const val day1date = "2020-05-23"
-        const val day2date = "2020-05-24"
-        const val day3date = "2020-05-25"
-        const val day4date = "2020-05-26"
-        const val day5date = "2020-05-27"
-        const val day6date = "2020-05-28"
-        const val day7date = "2020-05-29"
-        const val day8date = "2020-05-30"
-        const val day9date = "2020-05-31"
-        const val day10date = "2020-06-01"
+        const val day1date = "2020-06-03"
+        const val day2date = "2020-06-04"
+        const val day3date = "2020-06-05"
+        const val day4date = "2020-06-06"
+        const val day5date = "2020-06-07"
+        const val day6date = "2020-06-08"
+        const val day7date = "2020-06-09"
+        const val day8date = "2020-06-10"
+        const val day9date = "2020-06-11"
+        const val day10date = "2020-06-12"
     }
 }
