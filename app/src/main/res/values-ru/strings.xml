@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Прогноз погоды</string>
+
+    <string name="today">Сегодня</string>
+    <string name="forecast">Прогноз</string>
+    <string name="settings">Настройки</string>
+
+    <string name="next_10_days_text">Следующие 10 дней</string>
+    <string name="loading_text">Загрузка</string>
+    <string name="feels_like_text">Ощущается как</string>
+
+    <string name="wind_text">Ветер</string>
+    <string name="precipitation_text">Осадки</string>
+    <string name="visibility_text">Видимость</string>
+
+    <string name="kilometers_abbreviation_text">км</string>
+    <string name="kilometers_per_hour_abbreviation_text">км/ч</string>
+    <string name="millimeters_abbreviation_text">мм</string>
+
+    <string name="miles_abbreviation_text">мл</string>
+    <string name="miles_per_hour_abbreviation_text">мл/ч</string>
+    <string name="inch_abbreviation_text">дм</string>
+
+</resources>
