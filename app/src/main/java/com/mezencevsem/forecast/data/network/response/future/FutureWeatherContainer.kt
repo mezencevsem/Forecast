@@ -25,6 +25,7 @@ data class FutureWeatherContainer(
     @SerializedName(day10date)
     val day10: FutureWeatherEntry
 ) {
+    //TODO trash
     companion object {
         const val day1date = "2020-06-03"
         const val day2date = "2020-06-04"

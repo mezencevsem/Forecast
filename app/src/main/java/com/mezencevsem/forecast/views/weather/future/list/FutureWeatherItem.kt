@@ -19,20 +19,20 @@ class FutureWeatherItem(
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {
             updateDate()
-            updateTemperature()
+            updateAverageTemperature()
             updateTemperatureRange()
         }
     }
 
     override fun getLayout() = R.layout.item_future_weather
 
-    private fun ViewHolder.updateTemperature() {
-        textView_temperature.text = weatherEntry.avgtemp.toString().plus(unitAbbreviation)
+    private fun ViewHolder.updateAverageTemperature() {
+        textView_average_temperature.text = weatherEntry.avgtemp.toString().plus(unitAbbreviation)
     }
 
     private fun ViewHolder.updateTemperatureRange() {
-        textView_temperature_range.text = weatherEntry.mintemp.toString() + unitAbbreviation +
-                " .. " + weatherEntry.maxtemp.toString() + unitAbbreviation
+        textView_min_temperature.text = weatherEntry.mintemp.toString() + unitAbbreviation
+        textView_max_temperature.text = weatherEntry.maxtemp.toString() + unitAbbreviation
     }
 
     private fun ViewHolder.updateDate(){

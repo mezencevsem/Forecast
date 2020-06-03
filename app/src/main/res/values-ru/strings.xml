@@ -5,8 +5,10 @@
     <string name="today">Сегодня</string>
     <string name="forecast">Прогноз</string>
     <string name="settings">Настройки</string>
-
     <string name="next_10_days_text">Следующие 10 дней</string>
+    <string name="current_weather_text">Текущая погода</string>
+    <string name="future_weather_text">Прогноз погоды</string>
+
     <string name="loading_text">Загрузка</string>
     <string name="feels_like_text">Ощущается как</string>
 
@@ -21,5 +23,25 @@
     <string name="miles_abbreviation_text">мл</string>
     <string name="miles_per_hour_abbreviation_text">мл/ч</string>
     <string name="inch_abbreviation_text">дм</string>
+
+    <string name="weather_location_text">Местоположение</string>
+    <string name="localization_text">Локализация</string>
+    <string name="units_text">Единицы измерения</string>
+    <string name="use_device_location_summary_text">Позволить приложению получать ваше местоположение</string>
+    <string name="use_device_location_text">Использовать местоположение устройства</string>
+    <string name="location_text">Место</string>
+    <string name="location_summary_text">Место, для которого отображается погода</string>
+    <string name="language_text">Язык</string>
+    <string name="unit_system_text">Система мер</string>
+
+    <string name="metric_unit_system_text">Метрическая</string>
+    <string name="imperial_unit_system_text">Имперская</string>
+
+    <string name="system_language_text">Системный</string>
+    <string name="english_language_text">Английский</string>
+    <string name="russian_language_text">Русский</string>
+    <string name="location_permission_toast_text">Пожалуйста, установите местоположение вручную в настройках</string>
+
+    <string name="warning_about_the_need_to_restart_app_text">Необходима перезагрузка приложения</string>
 
 </resources>

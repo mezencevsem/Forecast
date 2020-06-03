@@ -41,6 +41,8 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
+        updateDateToToday()
+
         val currentWeather = viewModel.weather.await()
         val weatherLocation = viewModel.location.await()
 
@@ -54,7 +56,6 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             if (!viewModel.isEnglishLanguage && it.weatherDescriptionsRu == null) return@Observer
 
             group_loading.visibility = View.GONE
-            updateDateToToday()
 
             updateCondition(getLocalizedCondition(it))
             updateTemperatures(it.temperature, it.feelslike)
@@ -86,7 +87,9 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateTemperatures(temperature: Double, feelsLikeTemperature: Double) {
-        val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C", "°F")
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation(
+            getString(R.string.celsius_sign),
+            getString(R.string.fahrenheit_sign))
         textView_temperature.text = "$temperature$unitAbbreviation"
         textView_feels_like_temperature.text = getString(R.string.feels_like_text) + " $feelsLikeTemperature$unitAbbreviation"
     }

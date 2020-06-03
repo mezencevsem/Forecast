@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Weather Location">
+    <PreferenceCategory android:title="@string/weather_location_text">
         <SwitchPreference
             android:defaultValue="true"
             android:disableDependentsState="true"
             android:key="USE_DEVICE_LOCATION"
-            android:summary="Allow the app to get your location"
-            android:title="Use device location" />
+            android:summary="@string/use_device_location_summary_text"
+            android:title="@string/use_device_location_text" />
 
         <EditTextPreference
-            android:defaultValue="Moscow"
+            android:defaultValue="Москва"
             android:dependency="USE_DEVICE_LOCATION"
             android:key="CUSTOM_LOCATION"
-            android:summary="The location for witch the weather is displayed"
-            android:title="Location" />
+            android:summary="@string/location_summary_text"
+            android:title="@string/location_text" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Localization">
+    <PreferenceCategory
+        android:summary="@string/warning_about_the_need_to_restart_app_text"
+        android:title="@string/localization_text">
         <ListPreference
-            android:defaultValue="ENGLISH"
+            android:defaultValue="SYSTEM"
             android:entries="@array/languageEntries"
             android:entryValues="@array/languageValues"
             android:key="LANGUAGE"
             android:summary="%s"
-            android:title="Language" />
+            android:title="@string/language_text" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Units">
+    <PreferenceCategory android:title="@string/units_text">
         <ListPreference
             android:defaultValue="METRIC"
             android:entries="@array/unitSystemEntries"
             android:entryValues="@array/unitSystemValues"
             android:key="UNIT_SYSTEM"
             android:summary="%s"
-            android:title="Unit system" />
+            android:title="@string/unit_system_text" />
     </PreferenceCategory>
 </PreferenceScreen>

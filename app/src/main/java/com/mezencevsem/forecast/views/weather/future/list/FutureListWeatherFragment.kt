@@ -37,10 +37,13 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(FutureListWeatherViewModel::class.java)
+
         bindUI()
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
+        updateDateToNextTenDays()
+
         val futureWeatherEntries = viewModel.weatherEntries.await()
         val weatherLocation = viewModel.location.await()
 
@@ -50,11 +53,10 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
         })
 
         futureWeatherEntries.observe(viewLifecycleOwner, Observer { weatherEntries ->
-            if(weatherEntries == null) return@Observer
+            if (weatherEntries == null) return@Observer
 
             group_loading.visibility = View.GONE
 
-            updateDateToNextTenDays()
             initRecyclerView(weatherEntries.toFutureWeatherItems())
         })
     }
@@ -64,11 +66,14 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateDateToNextTenDays() {
-        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = getString(R.string.next_10_days_text)
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle =
+            getString(R.string.next_10_days_text)
     }
 
-    private fun List<FutureWeatherEntry>.toFutureWeatherItems() : List<FutureWeatherItem> {
-        val unitAbbreviation = if (viewModel.isMetricUnit) "°C" else "°F"
+    private fun List<FutureWeatherEntry>.toFutureWeatherItems(): List<FutureWeatherItem> {
+        val unitAbbreviation = if (viewModel.isMetricUnit) getString(R.string.celsius_sign)
+        else getString(R.string.fahrenheit_sign)
+
         return this.map {
             FutureWeatherItem(it, unitAbbreviation, viewModel.isEnglishLanguage)
         }
@@ -83,9 +88,5 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
             layoutManager = LinearLayoutManager(this@FutureListWeatherFragment.context)
             adapter = groupAdapter
         }
-        
-        /*groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this.context, "detail", Toast.LENGTH_SHORT).show()
-        }*/
     }
 }

@@ -5,8 +5,8 @@
         <item>IMPERIAL</item>
     </string-array>
     <string-array name="unitSystemEntries">
-        <item>Metric</item>
-        <item>Imperial</item>
+        <item>@string/metric_unit_system_text</item>
+        <item>@string/imperial_unit_system_text</item>
     </string-array>
     <string-array name="languageValues">
         <item>SYSTEM</item>
@@ -14,8 +14,8 @@
         <item>RUSSIAN</item>
     </string-array>
     <string-array name="languageEntries">
-        <item>System</item>
-        <item>English</item>
-        <item>Russian</item>
+        <item>@string/system_language_text</item>
+        <item>@string/english_language_text</item>
+        <item>@string/russian_language_text</item>
     </string-array>
 </resources>

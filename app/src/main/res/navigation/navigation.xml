@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/currentWeatherFragment"
         android:name="com.mezencevsem.forecast.views.weather.current.CurrentWeatherFragment"
-        android:label="Current weather"
+        android:label="@string/current_weather_text"
         tools:layout="@layout/current_weather_fragment" />
     <fragment
         android:id="@+id/futureListWeatherFragment"
         android:name="com.mezencevsem.forecast.views.weather.future.list.FutureListWeatherFragment"
-        android:label="Future weather"
+        android:label="@string/future_weather_text"
         tools:layout="@layout/future_list_weather_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.mezencevsem.forecast.views.settings.SettingsFragment"
-        android:label="Settings" />
+        android:label="@string/settings" />
 
 </navigation>
