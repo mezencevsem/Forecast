@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="celsius_sign" translatable="false">°C</string>
+    <string name="fahrenheit_sign" translatable="false">°F</string>
+
     <string name="app_name">Weather forecast</string>
 
     <string name="today">Today</string>
@@ -42,9 +45,9 @@
     <string name="russian_language_text">Russian</string>
     <string name="location_permission_toast_text">Please, set location manually in settings</string>
 
-    <string name="celsius_sign" translatable="false">°C</string>
-    <string name="fahrenheit_sign" translatable="false">°F</string>
-
     <string name="warning_about_the_need_to_restart_app_text">You need to restart the app</string>
+
+    <string name="personalization_text">Personalization</string>
+    <string name="dark_theme_text">Dark theme</string>
 
 </resources>

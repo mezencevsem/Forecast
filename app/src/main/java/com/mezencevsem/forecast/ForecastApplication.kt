@@ -2,6 +2,7 @@ package com.mezencevsem.forecast
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -62,5 +63,11 @@ class ForecastApplication : Application(), KodeinAware {
         super.onCreate()
         AndroidThreeTen.init(this)
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val isDarkTheme = preferenceManager.getBoolean("DARK_THEME", false)
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+        )
     }
 }

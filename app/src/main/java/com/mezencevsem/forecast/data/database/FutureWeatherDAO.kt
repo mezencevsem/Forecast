@@ -10,6 +10,7 @@ import org.threeten.bp.LocalDate
 
 @Dao
 interface FutureWeatherDAO {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(futureWeatherEntries: FutureWeatherEntry)
 

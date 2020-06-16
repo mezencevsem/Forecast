@@ -83,6 +83,7 @@ class ForecastRepositoryImpl(
         GlobalScope.launch(Dispatchers.IO) {
             deleteOldForecastData()
             val futureWeatherList = fetchedWeather.futureWeatherEntries
+            futureWeatherDAO.insert(futureWeatherList.day0)
             futureWeatherDAO.insert(futureWeatherList.day1)
             futureWeatherDAO.insert(futureWeatherList.day2)
             futureWeatherDAO.insert(futureWeatherList.day3)
@@ -92,7 +93,6 @@ class ForecastRepositoryImpl(
             futureWeatherDAO.insert(futureWeatherList.day7)
             futureWeatherDAO.insert(futureWeatherList.day8)
             futureWeatherDAO.insert(futureWeatherList.day9)
-            futureWeatherDAO.insert(futureWeatherList.day10)
             weatherLocationDAO.upsert(fetchedWeather.location)
         }
     }
@@ -139,7 +139,8 @@ class ForecastRepositoryImpl(
         if (lastRequestInfo == null) return true
 
         if (lastRequestInfo.languageCode != languageProvider.getLanguageCode() ||
-            lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()) return true
+            lastRequestInfo.unitSystemCode != unitProvider.getUnitSystemCode()
+        ) return true
 
         val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
         return lastFetchedTime.isBefore(thirtyMinutesAgo)

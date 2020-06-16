@@ -7,9 +7,9 @@
             android:key="USE_DEVICE_LOCATION"
             android:summary="@string/use_device_location_summary_text"
             android:title="@string/use_device_location_text" />
-
+        <!--TODO Москва == Мексика ...-->
         <EditTextPreference
-            android:defaultValue="Москва"
+            android:defaultValue="Moscow"
             android:dependency="USE_DEVICE_LOCATION"
             android:key="CUSTOM_LOCATION"
             android:summary="@string/location_summary_text"
@@ -34,5 +34,11 @@
             android:key="UNIT_SYSTEM"
             android:summary="%s"
             android:title="@string/unit_system_text" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/personalization_text">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="DARK_THEME"
+            android:title="@string/dark_theme_text" />
     </PreferenceCategory>
 </PreferenceScreen>

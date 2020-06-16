@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.mezencevsem.forecast.data.database.entity.FutureWeatherEntry
 
 data class FutureWeatherContainer(
+    @SerializedName(day0date)
+    val day0: FutureWeatherEntry,
     @SerializedName(day1date)
     val day1: FutureWeatherEntry,
     @SerializedName(day2date)
@@ -21,21 +23,19 @@ data class FutureWeatherContainer(
     @SerializedName(day8date)
     val day8: FutureWeatherEntry,
     @SerializedName(day9date)
-    val day9: FutureWeatherEntry,
-    @SerializedName(day10date)
-    val day10: FutureWeatherEntry
+    val day9: FutureWeatherEntry
 ) {
     //TODO trash
     companion object {
-        const val day1date = "2020-06-03"
-        const val day2date = "2020-06-04"
-        const val day3date = "2020-06-05"
-        const val day4date = "2020-06-06"
-        const val day5date = "2020-06-07"
-        const val day6date = "2020-06-08"
-        const val day7date = "2020-06-09"
-        const val day8date = "2020-06-10"
-        const val day9date = "2020-06-11"
-        const val day10date = "2020-06-12"
+        const val day0date = "2020-06-16"
+        const val day1date = "2020-06-17"
+        const val day2date = "2020-06-18"
+        const val day3date = "2020-06-19"
+        const val day4date = "2020-06-20"
+        const val day5date = "2020-06-21"
+        const val day6date = "2020-06-22"
+        const val day7date = "2020-06-23"
+        const val day8date = "2020-06-24"
+        const val day9date = "2020-06-25"
     }
 }

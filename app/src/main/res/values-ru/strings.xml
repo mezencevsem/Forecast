@@ -44,4 +44,7 @@
 
     <string name="warning_about_the_need_to_restart_app_text">Необходима перезагрузка приложения</string>
 
+    <string name="personalization_text">Персонализация</string>
+    <string name="dark_theme_text">Темная тема</string>
+
 </resources>
